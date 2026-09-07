@@ -36,6 +36,6 @@ jobs:
     uses: navikt/familie-baks-gha-workflows/.github/workflows/deploy.yaml@main # ratchet:exclude
     with:
       image: ${{ needs.build.outputs.image }}
-      cluster: dev-fss
+      cluster: dev-gcp
       resource: .nais/app-dev.yaml
     secrets: inherit
