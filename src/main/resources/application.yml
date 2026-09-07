@@ -1,0 +1,8 @@
+# Felles variabler
+NAIS_APP_NAME: familie-ks-infotrygd-replika
+DEPLOY_ENV: dev
+
+# Spring konfigurasjon
+spring:
+  application:
+    name: familie-ks-infotrygd-replika
