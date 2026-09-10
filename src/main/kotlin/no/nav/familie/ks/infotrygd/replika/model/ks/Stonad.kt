@@ -1,4 +1,4 @@
-package no.nav.infotrygd.kontantstotte.model.ks
+package no.nav.familie.ks.infotrygd.replika.model.ks
 
 import jakarta.persistence.CascadeType
 import jakarta.persistence.Column
@@ -15,6 +15,7 @@ import no.nav.infotrygd.kontantstotte.utils.DatoFormat
 import no.nav.infotrygd.kontantstotte.utils.fromSeqToYearMonthOrNull
 import no.nav.infotrygd.kontantstotte.utils.parseMMYYYYOrNull
 import org.hibernate.annotations.BatchSize
+import java.io.Serializable
 import java.math.BigDecimal
 import java.time.YearMonth
 
@@ -47,7 +48,7 @@ class Stonad(
         ],
     )
     @BatchSize(size = 100)
-    val barn: List<no.nav.infotrygd.kontantstotte.model.ks.Barn>,
+    val barn: List<Barn>,
     @OneToMany(cascade = [CascadeType.ALL])
     @JoinColumns(
         value = [
@@ -58,8 +59,8 @@ class Stonad(
         ],
     )
     @BatchSize(size = 100)
-    val utbetalinger: List<no.nav.infotrygd.kontantstotte.model.ks.Utbetaling>,
-) : java.io.Serializable {
+    val utbetalinger: List<Utbetaling>,
+) : Serializable {
     val fom: YearMonth?
         get() = fromSeqToYearMonthOrNull(virkfomSeq, DatoFormat.YYYYMM)
 

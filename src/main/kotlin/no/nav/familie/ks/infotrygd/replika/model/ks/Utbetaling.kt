@@ -1,4 +1,4 @@
-package no.nav.infotrygd.kontantstotte.model.ks
+package no.nav.familie.ks.infotrygd.replika.model.ks
 
 import jakarta.persistence.Column
 import jakarta.persistence.Convert

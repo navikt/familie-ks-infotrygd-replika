@@ -1,0 +1,75 @@
+package no.nav.familie.ks.infotrygd.replika.service
+
+import no.nav.commons.foedselsnummer.Foedselsnummer
+import no.nav.familie.ks.infotrygd.replika.repository.BarnRepository
+import no.nav.familie.ks.infotrygd.replika.repository.StonadRepository
+import no.nav.infotrygd.kontantstotte.dto.BarnDto
+import no.nav.infotrygd.kontantstotte.dto.InnsynRequest
+import no.nav.infotrygd.kontantstotte.dto.InnsynResponse
+import no.nav.infotrygd.kontantstotte.dto.StonadDto
+import no.nav.infotrygd.kontantstotte.dto.tilFoedselsnummere
+import no.nav.familie.ks.infotrygd.replika.model.ks.Stonad
+import org.slf4j.LoggerFactory
+import org.springframework.stereotype.Service
+
+@Service
+class InnsynService(
+    private val stonadRepository: StonadRepository,
+    private val barnRepository: BarnRepository,
+) {
+    fun hentDataForSøker(req: InnsynRequest): InnsynResponse {
+        val stonader = stonadRepository.findByFnrIn(req.barn.map { Foedselsnummer(it) })
+        return InnsynResponse(
+            data = stonader.map { it.toDto() },
+        )
+    }
+
+    fun hentDataForBarn(req: InnsynRequest): InnsynResponse {
+        val barna = barnRepository.findByFnrIn(req.barn.tilFoedselsnummere())
+        val stonader = stonadRepository.findByBarnIn(barna)
+        return InnsynResponse(
+            data = stonader.map { it.toDto() },
+        )
+    }
+
+    fun hentbarnmedløpendekontantstøtte(): List<String> {
+        val stønader = stonadRepository.findByOpphoertVfomEquals("000000")
+        logger.info("Fant ${stønader.size} stønader")
+
+        val foedselsnumre = stønader.map { stonad -> stonad.barn.map { barn -> barn.fnr } }
+        logger.info("Fant ${foedselsnumre.size} foedselsnumre")
+        return foedselsnumre.flatten().map { it.asString }
+    }
+
+    fun hentSøkerOgBarnMedLøpendeKontantstøtte(): List<SøkerOgBarn> {
+        val stønader = stonadRepository.findByOpphoertVfomEquals("000000")
+        logger.info("Fant ${stønader.size} stønader")
+
+        val foedselsnumre =
+            stønader.map { stonad ->
+                SøkerOgBarn(
+                    søkerIdent = stonad.fnr.asString,
+                    barnIdenter = stonad.barn.map { it.fnr.asString },
+                )
+            }
+        return foedselsnumre
+    }
+
+    companion object {
+        private val logger = LoggerFactory.getLogger(InnsynService::class.java)
+    }
+}
+
+data class SøkerOgBarn(
+    val søkerIdent: String,
+    val barnIdenter: List<String>,
+)
+
+private fun Stonad.toDto(): StonadDto =
+    StonadDto(
+        fnr = this.fnr,
+        fom = this.fom,
+        tom = this.tom,
+        belop = this.belop,
+        barn = this.barn.map { BarnDto(fnr = it.fnr) },
+    )

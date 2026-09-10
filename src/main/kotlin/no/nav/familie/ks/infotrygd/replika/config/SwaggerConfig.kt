@@ -1,0 +1,84 @@
+package no.nav.familie.ks.infotrygd.replika.config
+
+import com.fasterxml.jackson.annotation.JsonProperty
+import io.swagger.v3.oas.models.Components
+import io.swagger.v3.oas.models.OpenAPI
+import io.swagger.v3.oas.models.info.Info
+import io.swagger.v3.oas.models.security.OAuthFlow
+import io.swagger.v3.oas.models.security.OAuthFlows
+import io.swagger.v3.oas.models.security.Scopes
+import io.swagger.v3.oas.models.security.SecurityRequirement
+import io.swagger.v3.oas.models.security.SecurityScheme
+import no.nav.familie.ks.infotrygd.replika.Profiles
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Profile
+
+private data class OAuthInfo(
+    @JsonProperty("authorization_endpoint")
+    val authorizationEndpoint: String,
+    @JsonProperty("token_endpoint")
+    val tokenEndpoint: String,
+)
+
+@Configuration
+@Profile("!${Profiles.NOAUTH}")
+class SwaggerConfig(
+    @Value("\${AUTHORIZATION_URL}")
+    val authorizationUrl: String,
+    @Value("\${TOKEN_URL}")
+    val tokenUrl: String,
+    @Value("\${API_SCOPE}")
+    val apiScope: String,
+) {
+    @Bean
+    @Profile("!lokal")
+    fun kontantstøtteInfotrygdApi(): OpenAPI =
+        OpenAPI()
+            .info(Info().title("Kontantstøtte infotrygd API").version("v1"))
+            .components(
+                Components()
+                    .addSecuritySchemes("oauth2", securitySchemes()),
+            ).addSecurityItem(
+                SecurityRequirement()
+                    .addList("oauth2", listOf("read", "write")),
+            )
+
+    @Bean
+    @Profile("lokal")
+    fun kontantstøtteInfotrygdApiLokal(): OpenAPI =
+        OpenAPI()
+            .info(Info().title("Kontantstøtte infotrygd API").version("v1"))
+            .components(
+                Components()
+                    .addSecuritySchemes("bearer", bearerTokenSecurityScheme()),
+            ).addSecurityItem(
+                SecurityRequirement()
+                    .addList("bearer"),
+            )
+
+    private fun securitySchemes(): SecurityScheme =
+        SecurityScheme()
+            .name("oauth2")
+            .type(SecurityScheme.Type.OAUTH2)
+            .scheme("oauth2")
+            .`in`(SecurityScheme.In.HEADER)
+            .flows(
+                OAuthFlows()
+                    .authorizationCode(
+                        OAuthFlow()
+                            .authorizationUrl(authorizationUrl)
+                            .tokenUrl(tokenUrl)
+                            .scopes(Scopes().addString(apiScope, "read,write")),
+                    ),
+            )
+
+    private fun bearerTokenSecurityScheme(): SecurityScheme =
+        SecurityScheme()
+            .type(SecurityScheme.Type.HTTP)
+            .scheme("bearer")
+            .bearerFormat("JWT")
+            .`in`(SecurityScheme.In.HEADER)
+            .name("Authorization")
+}
