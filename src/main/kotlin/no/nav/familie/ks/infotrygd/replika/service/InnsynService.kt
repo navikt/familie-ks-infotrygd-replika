@@ -1,6 +1,7 @@
 package no.nav.familie.ks.infotrygd.replika.service
 
 import no.nav.commons.foedselsnummer.Foedselsnummer
+import no.nav.familie.ks.infotrygd.replika.model.ks.Stonad
 import no.nav.familie.ks.infotrygd.replika.repository.BarnRepository
 import no.nav.familie.ks.infotrygd.replika.repository.StonadRepository
 import no.nav.infotrygd.kontantstotte.dto.BarnDto
@@ -8,7 +9,6 @@ import no.nav.infotrygd.kontantstotte.dto.InnsynRequest
 import no.nav.infotrygd.kontantstotte.dto.InnsynResponse
 import no.nav.infotrygd.kontantstotte.dto.StonadDto
 import no.nav.infotrygd.kontantstotte.dto.tilFoedselsnummere
-import no.nav.familie.ks.infotrygd.replika.model.ks.Stonad
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 

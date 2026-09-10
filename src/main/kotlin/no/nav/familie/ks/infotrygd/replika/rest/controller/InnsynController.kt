@@ -33,6 +33,5 @@ class InnsynController(
     fun harKontantstotteIInfotrygd(): List<String> = innsynService.hentbarnmedløpendekontantstøtte()
 
     @GetMapping("/hent-soekere-og-barn-med-loepende-kontantstoette")
-    fun hentSøkereOgBarnMedLøpendeKontantstøtteIInfotrygd(): List<SøkerOgBarn> =
-        innsynService.hentSøkerOgBarnMedLøpendeKontantstøtte()
+    fun hentSøkereOgBarnMedLøpendeKontantstøtteIInfotrygd(): List<SøkerOgBarn> = innsynService.hentSøkerOgBarnMedLøpendeKontantstøtte()
 }

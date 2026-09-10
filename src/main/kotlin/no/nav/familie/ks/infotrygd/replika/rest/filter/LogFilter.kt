@@ -62,16 +62,15 @@ class LogFilter(
         try {
             val consumerId = request.getHeader("Nav-Consumer-Id") ?: "[ukjent_applikasjon]"
             MdcHelper.consumerId = consumerId
-            MdcHelper.callId = request.getHeader("Nav-CallId")
-                ?: request.getHeader("Nav-Call-Id")
-                        ?: request.getHeader("X-Nav-CallId")
-                        ?: UUID.randomUUID().toString()
+            MdcHelper.callId =
+                request.getHeader("Nav-CallId") ?: request.getHeader("Nav-Call-Id") ?: request.getHeader("X-Nav-CallId")
+                    ?: UUID.randomUUID().toString()
             registry.counter("${applicationName}_consumers", listOf(Tag.of("consumer_id", consumerId))).increment()
         } catch (e: Exception) {
             log.warn(
                 "Noe gikk galt ved setting av MDC-verdier for request {}, MDC-verdier er inkomplette",
                 request.requestURI,
-                e
+                e,
             )
         }
     }
