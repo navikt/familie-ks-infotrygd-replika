@@ -1,4 +1,4 @@
-package no.nav.infotrygd.kontantstotte.model.converters
+package no.nav.familie.ks.infotrygd.replika.model.converters
 
 import jakarta.persistence.AttributeConverter
 import jakarta.persistence.Converter
@@ -21,7 +21,7 @@ abstract class AbstractCharConverter(
 }
 
 @Converter
-class BrukerIdConverter : no.nav.infotrygd.kontantstotte.model.converters.AbstractCharConverter(7)
+class BrukerIdConverter : AbstractCharConverter(7)
 
 @Converter
-class Char2Converter : no.nav.infotrygd.kontantstotte.model.converters.AbstractCharConverter(2)
+class Char2Converter : AbstractCharConverter(2)

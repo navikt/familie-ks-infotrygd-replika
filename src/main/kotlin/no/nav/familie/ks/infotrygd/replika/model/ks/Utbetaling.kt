@@ -5,6 +5,7 @@ import jakarta.persistence.Convert
 import jakarta.persistence.Entity
 import jakarta.persistence.Id
 import jakarta.persistence.Table
+import no.nav.familie.ks.infotrygd.replika.model.converters.NavCharYearMonthConverter
 import java.math.BigDecimal
 import java.time.YearMonth
 
@@ -23,10 +24,10 @@ data class Utbetaling(
     @Column(name = "K30_VFOM_SEQ")
     val virkfomSeq: String,
     @Column(name = "K30_UTBET_FOM")
-    @Convert(converter = _root_ide_package_.no.nav.infotrygd.kontantstotte.model.converters.NavCharYearMonthConverter::class)
+    @Convert(converter = NavCharYearMonthConverter::class)
     val fom: YearMonth?,
     @Column(name = "K30_UTBET_TOM")
-    @Convert(converter = _root_ide_package_.no.nav.infotrygd.kontantstotte.model.converters.NavCharYearMonthConverter::class)
+    @Convert(converter = NavCharYearMonthConverter::class)
     val tom: YearMonth?,
     @Column(name = "K30_BELOP", columnDefinition = "DECIMAL")
     val belop: Int,

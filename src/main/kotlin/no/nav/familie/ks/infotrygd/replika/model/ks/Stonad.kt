@@ -10,6 +10,7 @@ import jakarta.persistence.JoinColumns
 import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
 import no.nav.commons.foedselsnummer.Foedselsnummer
+import no.nav.familie.ks.infotrygd.replika.model.converters.ReversedFoedselNrConverter
 import no.nav.infotrygd.kontantstotte.utils.DatoFormat
 import no.nav.infotrygd.kontantstotte.utils.fromSeqToYearMonthOrNull
 import no.nav.infotrygd.kontantstotte.utils.parseMMYYYYOrNull
@@ -34,7 +35,7 @@ class Stonad(
     @Column(name = "K20_OPPHOERT_VFOM", columnDefinition = "VARCHAR2")
     val opphoertVfom: String?,
     @Column(name = "F_NR", columnDefinition = "CHAR")
-    @Convert(converter = _root_ide_package_.no.nav.infotrygd.kontantstotte.model.converters.ReversedFoedselNrConverter::class)
+    @Convert(converter = ReversedFoedselNrConverter::class)
     val fnr: Foedselsnummer,
     @OneToMany(cascade = [CascadeType.ALL])
     @JoinColumns(

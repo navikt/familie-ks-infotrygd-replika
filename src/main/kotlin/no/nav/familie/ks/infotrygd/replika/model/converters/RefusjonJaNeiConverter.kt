@@ -1,9 +1,9 @@
-package no.nav.infotrygd.kontantstotte.model.converters
+package no.nav.familie.ks.infotrygd.replika.model.converters
 
 import jakarta.persistence.AttributeConverter
 
 class RefusjonJaNeiConverter : AttributeConverter<Boolean, String?> {
-    private object CharConverter : no.nav.infotrygd.kontantstotte.model.converters.AbstractCharConverter(1)
+    private object CharConverter : AbstractCharConverter(1)
 
     override fun convertToDatabaseColumn(attribute: Boolean?): String? {
         if (attribute == true) {
@@ -12,5 +12,6 @@ class RefusjonJaNeiConverter : AttributeConverter<Boolean, String?> {
         return CharConverter.convertToDatabaseColumn(null)
     }
 
-    override fun convertToEntityAttribute(dbData: String?): Boolean = CharConverter.convertToEntityAttribute(dbData) != null
+    override fun convertToEntityAttribute(dbData: String?): Boolean =
+        CharConverter.convertToEntityAttribute(dbData) != null
 }

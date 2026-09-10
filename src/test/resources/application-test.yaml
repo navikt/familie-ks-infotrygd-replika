@@ -1,0 +1,11 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+  datasource:
+    url: jdbc:tc:postgresql:18.6://localhost/familie-ks-infotrygd-replika
+
+NAIS_APP_NAME: familie-ks-infotrygd-replika
+AZURE_APP_CLIENT_ID: testid
+AZURE_APP_CLIENT_SECRET: testsecret

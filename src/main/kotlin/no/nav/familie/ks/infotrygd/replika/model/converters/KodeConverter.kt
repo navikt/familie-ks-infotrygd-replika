@@ -1,9 +1,10 @@
-package no.nav.infotrygd.kontantstotte.model.converters
+package no.nav.familie.ks.infotrygd.replika.model.converters
 
 import jakarta.persistence.AttributeConverter
 import no.nav.infotrygd.kontantstotte.exception.UkjentDatabaseverdiException
+import no.nav.infotrygd.kontantstotte.model.Kode
 
-abstract class KodeConverter<T : no.nav.infotrygd.kontantstotte.model.Kode>(
+abstract class KodeConverter<T : Kode>(
     private val koder: List<T>,
     val fieldSize: Int = 0,
     val padChar: Char = ' ',

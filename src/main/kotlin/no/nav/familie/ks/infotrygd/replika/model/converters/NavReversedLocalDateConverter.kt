@@ -1,6 +1,6 @@
-package no.nav.infotrygd.kontantstotte.model.converters
+package no.nav.familie.ks.infotrygd.replika.model.converters
 
 import jakarta.persistence.Converter
 
 @Converter
-class NavReversedLocalDateConverter : no.nav.infotrygd.kontantstotte.model.converters.AbstractNavLocalDateConverter("ddMMyyyy")
+class NavReversedLocalDateConverter : AbstractNavLocalDateConverter("ddMMyyyy")

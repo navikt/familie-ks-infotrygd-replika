@@ -1,4 +1,4 @@
-package no.nav.infotrygd.kontantstotte.model.converters
+package no.nav.familie.ks.infotrygd.replika.model.converters
 
 import jakarta.persistence.AttributeConverter
 import jakarta.persistence.Converter

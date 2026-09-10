@@ -1,8 +1,62 @@
+application:
+  name: familie-ks-infotrygd-replika
+
 # Felles variabler
 NAIS_APP_NAME: familie-ks-infotrygd-replika
 DEPLOY_ENV: dev
 
+
+server.port: 8080
+
 # Spring konfigurasjon
 spring:
+  main:
+    banner-mode: "off"
   application:
     name: familie-ks-infotrygd-replika
+  datasource:
+    url: ${DB_JDBC_URL} #TODO: hikari
+  jpa:
+    hibernate:
+      ddl-auto: none
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${AZURE_OPENID_CONFIG_ISSUER}
+          audiences:
+            - ${AZURE_APP_CLIENT_ID}
+            - api://${AZURE_APP_CLIENT_ID}
+  flyway:
+    enabled: true
+
+
+management:
+  endpoint:
+    health:
+      show-details: ALWAYS
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+
+#oidc...
+http.proxy.parametername: notused
+
+springdoc:
+  packages-to-scan: "no.nav.familie.ks.infotrygd.replika"
+  paths-to-match: "/api/**,/testtoken/**"
+  swagger-ui:
+    oauth:
+      use-pkce-with-authorization-code-grant: true
+      client-id: ${AZURE_APP_CLIENT_ID}
+      scope-separator: ","
+    disable-swagger-default-url: true
+
+
+# Swagger
+AUTHORIZATION_URL: https://login.microsoftonline.com/navq.onmicrosoft.com/oauth2/v2.0/authorize
+TOKEN_URL: https://login.microsoftonline.com/navq.onmicrosoft.com/oauth2/v2.0/token
+API_SCOPE: api://${AZURE_APP_CLIENT_ID}/.default
+
+TEAMFAMILIE_FORVALTNING_GROUP_ID: "c62e908a-cf20-4ad0-b7b3-3ff6ca4bf38b"
