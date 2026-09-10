@@ -1,0 +1,73 @@
+package no.nav.infotrygd.kontantstotte.model.ks
+
+import jakarta.persistence.CascadeType
+import jakarta.persistence.Column
+import jakarta.persistence.Convert
+import jakarta.persistence.Entity
+import jakarta.persistence.Id
+import jakarta.persistence.JoinColumn
+import jakarta.persistence.JoinColumns
+import jakarta.persistence.OneToMany
+import jakarta.persistence.Table
+import no.nav.commons.foedselsnummer.Foedselsnummer
+import no.nav.infotrygd.kontantstotte.utils.DatoFormat
+import no.nav.infotrygd.kontantstotte.utils.fromSeqToYearMonthOrNull
+import no.nav.infotrygd.kontantstotte.utils.parseMMYYYYOrNull
+import org.hibernate.annotations.BatchSize
+import java.math.BigDecimal
+import java.time.YearMonth
+
+@Entity
+@Table(name = "KS_STONAD_20")
+class Stonad(
+    @Id
+    @Column(name = "ID_STND", nullable = false)
+    val id: BigDecimal,
+    @Column(name = "REGION", columnDefinition = "CHAR")
+    val region: String,
+    @Column(name = "K01_PERSONKEY")
+    val personkey: BigDecimal,
+    @Column(name = "K20_IVERFOM_SEQ")
+    val iverfomSeq: String,
+    @Column(name = "K20_VIRKFOM_SEQ")
+    val virkfomSeq: String,
+    @Column(name = "K20_OPPHOERT_VFOM", columnDefinition = "VARCHAR2")
+    val opphoertVfom: String?,
+    @Column(name = "F_NR", columnDefinition = "CHAR")
+    @Convert(converter = _root_ide_package_.no.nav.infotrygd.kontantstotte.model.converters.ReversedFoedselNrConverter::class)
+    val fnr: Foedselsnummer,
+    @OneToMany(cascade = [CascadeType.ALL])
+    @JoinColumns(
+        value = [
+            JoinColumn(name = "REGION", referencedColumnName = "REGION"),
+            JoinColumn(name = "K01_PERSONKEY", referencedColumnName = "K01_PERSONKEY"),
+            JoinColumn(name = "K10_BA_IVER_SEQ", referencedColumnName = "K20_IVERFOM_SEQ"),
+            JoinColumn(name = "K10_BA_VFOM_SEQ", referencedColumnName = "K20_VIRKFOM_SEQ"),
+        ],
+    )
+    @BatchSize(size = 100)
+    val barn: List<no.nav.infotrygd.kontantstotte.model.ks.Barn>,
+    @OneToMany(cascade = [CascadeType.ALL])
+    @JoinColumns(
+        value = [
+            JoinColumn(name = "REGION", referencedColumnName = "REGION"),
+            JoinColumn(name = "K01_PERSONKEY", referencedColumnName = "K01_PERSONKEY"),
+            JoinColumn(name = "K30_START_UTBET_MND_SEQ", referencedColumnName = "K20_IVERFOM_SEQ"),
+            JoinColumn(name = "K30_VFOM_SEQ", referencedColumnName = "K20_VIRKFOM_SEQ"),
+        ],
+    )
+    @BatchSize(size = 100)
+    val utbetalinger: List<no.nav.infotrygd.kontantstotte.model.ks.Utbetaling>,
+) : java.io.Serializable {
+    val fom: YearMonth?
+        get() = fromSeqToYearMonthOrNull(virkfomSeq, DatoFormat.YYYYMM)
+
+    val tom: YearMonth?
+        get() = parseMMYYYYOrNull(opphoertVfom)?.minusMonths(1)
+
+    val belop: Int?
+        get() = utbetalinger.filter { it.type.trim() == "M" }.firstOrNull()?.belop
+
+    override fun toString(): String =
+        "Stonad(id=$id, region=$region, personkey=$personkey, iverfomSeq=$iverfomSeq, virkfomSeq=$virkfomSeq, opphoertVfom=$opphoertVfom)"
+}
