@@ -12,6 +12,5 @@ class RefusjonJaNeiConverter : AttributeConverter<Boolean, String?> {
         return CharConverter.convertToDatabaseColumn(null)
     }
 
-    override fun convertToEntityAttribute(dbData: String?): Boolean =
-        CharConverter.convertToEntityAttribute(dbData) != null
+    override fun convertToEntityAttribute(dbData: String?): Boolean = CharConverter.convertToEntityAttribute(dbData) != null
 }
