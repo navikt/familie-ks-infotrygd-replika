@@ -3,7 +3,7 @@ package no.nav.infotrygd.kontantstotte.model.converters
 import jakarta.persistence.AttributeConverter
 
 class RefusjonJaNeiConverter : AttributeConverter<Boolean, String?> {
-    private object CharConverter : AbstractCharConverter(1)
+    private object CharConverter : no.nav.infotrygd.kontantstotte.model.converters.AbstractCharConverter(1)
 
     override fun convertToDatabaseColumn(attribute: Boolean?): String? {
         if (attribute == true) {

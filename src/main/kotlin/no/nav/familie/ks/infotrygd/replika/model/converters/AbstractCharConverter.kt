@@ -21,7 +21,7 @@ abstract class AbstractCharConverter(
 }
 
 @Converter
-class BrukerIdConverter : AbstractCharConverter(7)
+class BrukerIdConverter : no.nav.infotrygd.kontantstotte.model.converters.AbstractCharConverter(7)
 
 @Converter
-class Char2Converter : AbstractCharConverter(2)
+class Char2Converter : no.nav.infotrygd.kontantstotte.model.converters.AbstractCharConverter(2)

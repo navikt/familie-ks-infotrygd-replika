@@ -6,7 +6,6 @@ import jakarta.persistence.Entity
 import jakarta.persistence.Id
 import jakarta.persistence.Table
 import no.nav.commons.foedselsnummer.Foedselsnummer
-import no.nav.infotrygd.kontantstotte.model.converters.ReversedLongFoedselNrConverter
 import java.math.BigDecimal
 
 @Entity
@@ -24,6 +23,6 @@ data class Barn(
     @Column(name = "K10_BA_VFOM_SEQ")
     val virkfomSeq: String,
     @Column(name = "K10_BARN_FNR")
-    @Convert(converter = ReversedLongFoedselNrConverter::class)
+    @Convert(converter = _root_ide_package_.no.nav.infotrygd.kontantstotte.model.converters.ReversedLongFoedselNrConverter::class)
     val fnr: Foedselsnummer,
 )

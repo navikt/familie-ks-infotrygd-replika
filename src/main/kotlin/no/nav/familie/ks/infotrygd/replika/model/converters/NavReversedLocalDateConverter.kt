@@ -3,4 +3,4 @@ package no.nav.infotrygd.kontantstotte.model.converters
 import jakarta.persistence.Converter
 
 @Converter
-class NavReversedLocalDateConverter : AbstractNavLocalDateConverter("ddMMyyyy")
+class NavReversedLocalDateConverter : no.nav.infotrygd.kontantstotte.model.converters.AbstractNavLocalDateConverter("ddMMyyyy")

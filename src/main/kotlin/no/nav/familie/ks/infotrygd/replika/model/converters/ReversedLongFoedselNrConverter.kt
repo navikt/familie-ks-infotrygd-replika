@@ -4,7 +4,8 @@ import jakarta.persistence.AttributeConverter
 import no.nav.commons.foedselsnummer.Foedselsnummer
 
 class ReversedLongFoedselNrConverter : AttributeConverter<Foedselsnummer?, Long?> {
-    private val converter = ReversedFoedselNrConverter()
+    private val converter =
+        _root_ide_package_.no.nav.infotrygd.kontantstotte.model.converters.ReversedFoedselNrConverter()
 
     override fun convertToDatabaseColumn(attribute: Foedselsnummer?): Long? = converter.convertToDatabaseColumn(attribute)?.toLong() ?: 0
 

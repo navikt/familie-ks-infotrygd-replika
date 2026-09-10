@@ -6,7 +6,7 @@ import java.time.LocalDate
 
 @Converter
 class NavCharDateConverter : AttributeConverter<LocalDate?, String?> {
-    private val converter = NavLocalDateConverter()
+    private val converter = _root_ide_package_.no.nav.infotrygd.kontantstotte.model.converters.NavLocalDateConverter()
 
     override fun convertToDatabaseColumn(attribute: LocalDate?): String? = converter.convertToDatabaseColumn(attribute)?.toString()
 

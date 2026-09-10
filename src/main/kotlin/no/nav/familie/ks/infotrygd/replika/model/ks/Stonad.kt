@@ -10,7 +10,6 @@ import jakarta.persistence.JoinColumns
 import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
 import no.nav.commons.foedselsnummer.Foedselsnummer
-import no.nav.infotrygd.kontantstotte.model.converters.ReversedFoedselNrConverter
 import no.nav.infotrygd.kontantstotte.utils.DatoFormat
 import no.nav.infotrygd.kontantstotte.utils.fromSeqToYearMonthOrNull
 import no.nav.infotrygd.kontantstotte.utils.parseMMYYYYOrNull
@@ -35,7 +34,7 @@ class Stonad(
     @Column(name = "K20_OPPHOERT_VFOM", columnDefinition = "VARCHAR2")
     val opphoertVfom: String?,
     @Column(name = "F_NR", columnDefinition = "CHAR")
-    @Convert(converter = ReversedFoedselNrConverter::class)
+    @Convert(converter = _root_ide_package_.no.nav.infotrygd.kontantstotte.model.converters.ReversedFoedselNrConverter::class)
     val fnr: Foedselsnummer,
     @OneToMany(cascade = [CascadeType.ALL])
     @JoinColumns(
@@ -47,7 +46,7 @@ class Stonad(
         ],
     )
     @BatchSize(size = 100)
-    val barn: List<Barn>,
+    val barn: List<no.nav.infotrygd.kontantstotte.model.ks.Barn>,
     @OneToMany(cascade = [CascadeType.ALL])
     @JoinColumns(
         value = [
@@ -58,7 +57,7 @@ class Stonad(
         ],
     )
     @BatchSize(size = 100)
-    val utbetalinger: List<Utbetaling>,
+    val utbetalinger: List<no.nav.infotrygd.kontantstotte.model.ks.Utbetaling>,
 ) : java.io.Serializable {
     val fom: YearMonth?
         get() = fromSeqToYearMonthOrNull(virkfomSeq, DatoFormat.YYYYMM)

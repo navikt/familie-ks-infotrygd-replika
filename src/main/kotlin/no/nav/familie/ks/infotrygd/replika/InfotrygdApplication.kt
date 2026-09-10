@@ -1,4 +1,4 @@
-package no.nav.familie.ks.replika
+package no.nav.familie.ks.infotrygd.replika
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
