@@ -1,0 +1,75 @@
+package no.nav.familie.ks.infotrygd.replika.testutil
+
+import no.nav.familie.ks.infotrygd.replika.model.ks.Barn
+import no.nav.familie.ks.infotrygd.replika.model.ks.Stonad
+import no.nav.familie.ks.infotrygd.replika.model.ks.Utbetaling
+import java.math.BigDecimal
+import java.time.YearMonth
+
+class StonadFactory(
+    val region: String = "1",
+    val personkey: BigDecimal = nextId().toBigDecimal(),
+    val iverfomSeq: String = nextId().toString(),
+    val virkfomSeq: String = nextId().toString(),
+) {
+    fun stonad(
+        barnEksempler: List<Barn> = emptyList(),
+        utbetalingerEksempler: List<Utbetaling> = emptyList(),
+        opphoertVfom: String? = null,
+    ): Stonad {
+        val barn =
+            barnEksempler.map {
+                it.copy(
+                    region = region,
+                    personkey = personkey,
+                    iverSeq = iverfomSeq,
+                    virkfomSeq = virkfomSeq,
+                )
+            }
+
+        val utbetalinger =
+            utbetalingerEksempler.map {
+                it.copy(
+                    region = region,
+                    personkey = personkey,
+                    startUtbetaltMndSeq = iverfomSeq,
+                    virkfomSeq = virkfomSeq,
+                )
+            }
+
+        return Stonad(
+            id = nextId().toBigDecimal(),
+            region = region,
+            personkey = personkey,
+            iverfomSeq = iverfomSeq,
+            virkfomSeq = virkfomSeq,
+            opphoertVfom = opphoertVfom,
+            fnr = TestData.foedselsNr(),
+            barn = barn,
+            utbetalinger = utbetalinger,
+        )
+    }
+
+    fun barn(): Barn =
+        Barn(
+            region = region,
+            personkey = personkey,
+            iverSeq = iverfomSeq,
+            virkfomSeq = virkfomSeq,
+            id = nextId().toBigDecimal(),
+            fnr = TestData.foedselsNr(),
+        )
+
+    fun utbetaling(): Utbetaling =
+        Utbetaling(
+            region = region,
+            personkey = personkey,
+            startUtbetaltMndSeq = iverfomSeq,
+            virkfomSeq = virkfomSeq,
+            id = nextId().toBigDecimal(),
+            fom = YearMonth.of(2020, 1),
+            tom = YearMonth.of(2020, 1),
+            belop = 0,
+            type = "",
+        )
+}
