@@ -25,6 +25,7 @@
         <db-util.version>1.0.7</db-util.version>
         <wiremock.version>3.13.2</wiremock.version>
         <testcontainers.postgresql.version>1.21.4</testcontainers.postgresql.version>
+        <felles.version>4.20260818093920_16ad74a</felles.version>
     </properties>
 
     <dependencies>
@@ -44,6 +45,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>no.nav.familie.felles</groupId>
+            <artifactId>token-klient</artifactId>
+            <version>${felles.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
