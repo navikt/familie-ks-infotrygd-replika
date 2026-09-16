@@ -1,5 +1,6 @@
 package no.nav.familie.ks.infotrygd.replika.config
 
+import no.nav.familie.felles.tokenklient.entraid.EntraIDClient
 import no.nav.familie.felles.tokenklient.entraid.EntraIDRestClientFactory
 import no.nav.familie.felles.tokenklient.tokenx.TokenXClient
 import no.nav.familie.log.interceptor.ConsumerIdClientInterceptor
@@ -15,6 +16,7 @@ import org.springframework.web.client.RestClient
 @Configuration
 @Import(
     EntraIDRestClientFactory::class,
+    EntraIDClient::class,
 )
 class RestClientConfig(
     private val entraIDRestClientFactory: EntraIDRestClientFactory,
