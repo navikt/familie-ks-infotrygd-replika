@@ -23,7 +23,7 @@ enum class ExodusTabell(
     T_BEREGN_GRL("t_beregn_grl", listOf("vedtak_id", "type_belop", "tidspunkt_reg")),
     SA_SAK_10("sa_sak_10", listOf("id_sak")),
      */
-    KS_BARN_10("ks_barn_10", listOf("id_barn"))
+    KS_BARN_10("ks_barn_10", listOf("id_barn")),
     ;
 
     companion object {
