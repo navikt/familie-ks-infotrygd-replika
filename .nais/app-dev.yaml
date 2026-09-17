@@ -96,3 +96,5 @@ spec:
       value: https://familie-ks-exodus.dev-fss-pub.nais.io
     - name: EXODUS_SCOPE
       value: api://dev-fss.teamfamilie.familie-ks-exodus/.default
+    - name: EXODUS_SCHEDULER_ENABLED
+      value: "true"

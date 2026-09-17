@@ -13,6 +13,7 @@ enum class ExodusTabell(
     val tabellNavn: String,
     val primærnøkkel: List<String>,
 ) {
+    /*
     T_LOPENR_FNR("t_lopenr_fnr", listOf("person_lopenr")),
     T_STONAD("t_stonad", listOf("stonad_id")),
     T_VEDTAK("t_vedtak", listOf("vedtak_id")),
@@ -21,6 +22,8 @@ enum class ExodusTabell(
     T_ROLLE("t_rolle", listOf("vedtak_id", "type", "tidspunkt_reg", "person_lopenr_r")),
     T_BEREGN_GRL("t_beregn_grl", listOf("vedtak_id", "type_belop", "tidspunkt_reg")),
     SA_SAK_10("sa_sak_10", listOf("id_sak")),
+     */
+    KS_BARN_10("ks_barn_10", listOf("id_barn"))
     ;
 
     companion object {
