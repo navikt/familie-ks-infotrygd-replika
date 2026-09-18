@@ -9,10 +9,6 @@ import java.net.URI
 /**
  * Klient mot familie-ks-exodus sitt REST-API. /api/tellRader er kun ment til engangsbruk for
  * progresjonsvisning, og skal ikke kalles fra replikeringsløypa (se ExodusKlientService).
- *
- * URL-ene bygges absolutt her i klienten (ikke som baseUrl på RestClient-bean-en), fordi
- * EntraIDRestClientFactory i familie-felles lager en RestClient uten baseUrl. Uten absolutt URI
- * feiler kallet med "URI with undefined scheme" fra JDK HttpClient.
  */
 @Component
 class ExodusClient(

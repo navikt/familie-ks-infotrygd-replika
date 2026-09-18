@@ -82,7 +82,7 @@ class ExodusClientTest {
     }
 
     @Test
-    fun `base-url med trailing slash skal ikke gi dobbel skraastrek`() {
+    fun `base-url med trailing slash skal ikke gi dobbel skråstrek`() {
         val builder = RestClient.builder()
         val lokalServer = MockRestServiceServer.bindTo(builder).build()
         val klient =
