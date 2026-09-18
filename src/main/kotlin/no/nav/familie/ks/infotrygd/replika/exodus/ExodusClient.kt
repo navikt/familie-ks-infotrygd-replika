@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component
 import org.springframework.web.client.HttpClientErrorException
 import org.springframework.web.client.RestClient
 import org.springframework.web.client.body
+import java.net.URI
 
 /**
  * Klient mot familie-ks-exodus sitt REST-API. /api/tellRader er kun ment til engangsbruk for
@@ -12,7 +13,10 @@ import org.springframework.web.client.body
 @Component
 class ExodusClient(
     private val exodusRestClient: RestClient,
+    exodusProperties: ExodusProperties,
 ) {
+    private val baseUrl = exodusProperties.baseUrl.trimEnd('/')
+
     fun hentUttrekk(
         tabell: ExodusTabell,
         iterator: String?,
@@ -21,7 +25,7 @@ class ExodusClient(
         try {
             exodusRestClient
                 .post()
-                .uri("/api/hentUttrekk")
+                .uri(URI.create("$baseUrl/api/hentUttrekk"))
                 .body(HentUttrekkRequest(tabell.tabellNavn, iterator, antallRader.toLong()))
                 .retrieve()
                 .body<HentUttrekkResponse>() ?: HentUttrekkResponse(iterator = iterator.orEmpty())
@@ -32,7 +36,7 @@ class ExodusClient(
     fun tellRader(tabell: ExodusTabell): Long =
         exodusRestClient
             .post()
-            .uri("/api/tellRader")
+            .uri(URI.create("$baseUrl/api/tellRader"))
             .body(TellRaderRequest(tabell.tabellNavn))
             .retrieve()
             .body<TellRaderResponse>()
