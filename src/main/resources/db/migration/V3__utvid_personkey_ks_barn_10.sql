@@ -1,0 +1,2 @@
+ALTER TABLE ks_barn_10
+    ALTER COLUMN k01_personkey TYPE NUMERIC(15, 0);
