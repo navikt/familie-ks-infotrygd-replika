@@ -31,7 +31,6 @@ fun main(args: Array<String>) {
     System.setProperty("NAIS_TOKEN_ENDPOINT", "http://localhost:$port/api/v1/token")
     System.setProperty("NAIS_TOKEN_EXCHANGE_ENDPOINT", "http://localhost:$port/api/v1/token/exchange")
 
-
     SpringApplicationBuilder(ApplicationLocalMock::class.java)
         .profiles("test", "lokal")
         .run(*args)
