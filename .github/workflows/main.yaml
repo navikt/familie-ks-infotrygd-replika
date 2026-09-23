@@ -42,7 +42,7 @@ jobs:
     permissions:
       contents: read
       id-token: write
-    needs: [ deploy-dev ]
+    needs: [ build, deploy-dev ]
     uses: navikt/familie-baks-gha-workflows/.github/workflows/deploy.yaml@main # ratchet:exclude
     with:
       image: ${{ needs.build.outputs.image }}
