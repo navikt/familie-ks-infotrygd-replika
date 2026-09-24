@@ -95,4 +95,4 @@ spec:
     - name: EXODUS_SCOPE
       value: api://prod-fss.teamfamilie.familie-ks-exodus/.default
     - name: EXODUS_SCHEDULER_ENABLED
-      value: "false"
+      value: "true"
