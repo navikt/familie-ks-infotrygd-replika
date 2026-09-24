@@ -28,7 +28,7 @@ class FnrNormaliseringRepositoryTest {
     fun `normaliserer eksisterende ellevesifret verdi`() {
         settInn(id = 1, infotrygdFnr = "01020312345")
 
-        val antallOppdatert = repository.normaliserBarn()
+        val antallOppdatert = repository.normaliser(FnrKolonne.KS_BARN_10)
 
         assertThat(antallOppdatert).isEqualTo(1)
         assertThat(hentNormalisert(1)).isEqualTo("03020112345")
@@ -38,7 +38,7 @@ class FnrNormaliseringRepositoryTest {
     fun `gjenoppretter ledende null for tisifret verdi`() {
         settInn(id = 1, infotrygdFnr = "1020312345")
 
-        repository.normaliserBarn()
+        repository.normaliser(FnrKolonne.KS_BARN_10)
 
         assertThat(hentNormalisert(1)).isEqualTo("03020112345")
     }
@@ -47,7 +47,7 @@ class FnrNormaliseringRepositoryTest {
     fun `overskriver ikke allerede normalisert verdi`() {
         settInn(id = 1, infotrygdFnr = "01020312345", normalisertFnr = "eksisterer")
 
-        val antallOppdatert = repository.normaliserBarn()
+        val antallOppdatert = repository.normaliser(FnrKolonne.KS_BARN_10)
 
         assertThat(antallOppdatert).isZero()
         assertThat(hentNormalisert(1)).isEqualTo("eksisterer")

@@ -1,5 +1,6 @@
 package no.nav.familie.ks.infotrygd.replika.rest.controller
 
+import no.nav.familie.ks.infotrygd.replika.normalisering.FnrKolonne
 import no.nav.familie.ks.infotrygd.replika.normalisering.FnrNormaliseringRepository
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.transaction.annotation.Transactional
@@ -19,5 +20,5 @@ class FnrNormaliseringController(
 ) {
     @PostMapping
     @Transactional
-    fun normaliser(): FnrNormaliseringRespons = FnrNormaliseringRespons(repository.normaliserBarn())
+    fun normaliser(): FnrNormaliseringRespons = FnrNormaliseringRespons(repository.normaliser(FnrKolonne.KS_BARN_10))
 }
