@@ -44,6 +44,28 @@ class FnrNormaliseringRepositoryTest {
     }
 
     @Test
+    fun `gjenoppretter ledende nuller for nisifret verdi`() {
+        // 00121556789, dvs. foedt 15.12.2000
+        settInn(id = 1, infotrygdFnr = "121556789")
+
+        val antallOppdatert = repository.normaliser(FnrKolonne.KS_BARN_10)
+
+        assertThat(antallOppdatert).isEqualTo(1)
+        assertThat(hentNormalisert(1)).isEqualTo("15120056789")
+    }
+
+    @Test
+    fun `gjenoppretter ledende nuller for aattesifret verdi`() {
+        // 00010156789, dvs. foedt 01.01.2000
+        settInn(id = 1, infotrygdFnr = "10156789")
+
+        val antallOppdatert = repository.normaliser(FnrKolonne.KS_BARN_10)
+
+        assertThat(antallOppdatert).isEqualTo(1)
+        assertThat(hentNormalisert(1)).isEqualTo("01010056789")
+    }
+
+    @Test
     fun `overskriver ikke allerede normalisert verdi`() {
         settInn(id = 1, infotrygdFnr = "01020312345", normalisertFnr = "eksisterer")
 
