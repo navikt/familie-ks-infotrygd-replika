@@ -30,7 +30,7 @@ class FnrNormaliseringRepository(
                 substring(lpad(${fnrKolonne.kildekolonne}::text, 11, '0'), 7, 5)
             where ${fnrKolonne.kildekolonne} is not null
               and ${fnrKolonne.målkolonne} is null
-              and ${fnrKolonne.kildekolonne}::text ~ '^[0-9]{10,11}$'
+              and ${fnrKolonne.kildekolonne}::text ~ '^[0-9]{8,11}$'
             """,
         )
 }
