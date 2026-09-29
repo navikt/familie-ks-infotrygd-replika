@@ -113,7 +113,10 @@ class SeqDatoRepository(
         // evaluerer for rader som allerede har passert where.
         val datovalidering =
             when (format) {
-                SeqDatoFormat.YYYYMM -> "k.datotall % 100 between 1 and 12"
+                SeqDatoFormat.YYYYMM -> {
+                    "k.datotall % 100 between 1 and 12"
+                }
+
                 SeqDatoFormat.YYYYMMDD -> {
                     val år = "k.datotall / 10000"
                     val skuddår = "(case when ($år % 4 = 0 and $år % 100 <> 0) or $år % 400 = 0 then 1 else 0 end)"
