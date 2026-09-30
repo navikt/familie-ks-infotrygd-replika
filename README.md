@@ -1,3 +1,1 @@
-# familie-ks-infotrygd-replika
-
-Hei
+# familie-ks-infotrygd-replikaØ
