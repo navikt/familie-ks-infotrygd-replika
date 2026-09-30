@@ -151,12 +151,11 @@ class SeqDatoRepositoryTest {
     }
 
     @Test
-    fun `setter ikke dato for dag som ikke finnes i maaneden`() {
-        // 99999999 - 20240230 = 79759769, og 30. februar finnes ikke
-        settInn("sa_hendelse_20", id = 1, "s20_aksjonsdato_seq" to 79759769L)
+    fun `setter ikke dato for blank aatte-sifret seq`() {
+        settInn("ks_utbet_hist_40", id = 1, "k40_utbet_dato_seq" to "        ")
 
-        assertThat(repository.konverter(SeqDatoKolonne.SA_HENDELSE_20_AKSJONSDATO)).isZero()
-        assertThat(hentDato("sa_hendelse_20", id = 1, kolonne = "s20_aksjonsdato_seq_dato")).isNull()
+        assertThat(repository.konverter(SeqDatoKolonne.KS_UTBET_HIST_40_UTBET_DATO)).isZero()
+        assertThat(hentDato("ks_utbet_hist_40", id = 1, kolonne = "k40_utbet_dato_seq_dato")).isNull()
     }
 
     private fun settInn(
