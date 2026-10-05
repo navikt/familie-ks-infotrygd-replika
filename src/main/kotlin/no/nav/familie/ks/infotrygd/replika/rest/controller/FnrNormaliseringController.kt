@@ -4,6 +4,7 @@ import no.nav.familie.ks.infotrygd.replika.normalisering.FnrKolonne
 import no.nav.familie.ks.infotrygd.replika.normalisering.FnrNormaliseringRepository
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.transaction.annotation.Transactional
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -18,7 +19,9 @@ data class FnrNormaliseringRespons(
 class FnrNormaliseringController(
     private val repository: FnrNormaliseringRepository,
 ) {
-    @PostMapping
+    @PostMapping("/{kolonne}")
     @Transactional
-    fun normaliser(): FnrNormaliseringRespons = FnrNormaliseringRespons(repository.normaliser(FnrKolonne.KS_BARN_10))
+    fun normaliser(
+        @PathVariable kolonne: FnrKolonne,
+    ): FnrNormaliseringRespons = FnrNormaliseringRespons(repository.normaliser(kolonne))
 }
