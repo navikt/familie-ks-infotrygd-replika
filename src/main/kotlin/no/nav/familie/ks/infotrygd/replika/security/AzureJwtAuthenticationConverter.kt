@@ -39,6 +39,8 @@ class AzureJwtAuthenticationConverter(
             )
         }
 
+        secureLogger.debug("Bruker har roller: ${roller.joinToString(", ")}")
+
         val authorities = roller.map { SimpleGrantedAuthority(it.authority()) }
 
         return JwtAuthenticationToken(jwt, authorities)
