@@ -64,7 +64,9 @@ exodus:
   # klare for at appen skal begynne å lese/replikere data automatisk.
   scheduler-enabled: ${EXODUS_SCHEDULER_ENABLED:false}
 
-
+# Swagger
+AUTHORIZATION_URL: https://login.microsoftonline.com/navq.onmicrosoft.com/oauth2/v2.0/authorize
+TOKEN_URL: https://login.microsoftonline.com/navq.onmicrosoft.com/oauth2/v2.0/token
 API_SCOPE: api://${AZURE_APP_CLIENT_ID}/.default
 
 TEAMFAMILIE_FORVALTNING_GROUP_ID: "c62e908a-cf20-4ad0-b7b3-3ff6ca4bf38b"

@@ -90,8 +90,6 @@ spec:
         - "https://familie-ks-infotrygd-replika.intern.dev.nav.no/swagger-ui/oauth2-redirect.html"
       singlePageApplication: true
   env:
-    - name: SPRING_PROFILES_ACTIVE
-      value: dev
     - name: JDK_JAVA_OPTIONS
       value: "-XX:MinRAMPercentage=25.0 -XX:MaxRAMPercentage=75.0 -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/tmp"
     - name: EXODUS_BASE_URL
