@@ -47,8 +47,8 @@ open class SecurityConfiguration(
 
         configuration.allowedOrigins =
             listOf(
-                "https://familie-ks-infotrygd.intern.dev.nav.no",
-                "https://familie-ks-infotrygd.intern.nav.no",
+                "https://familie-ks-infotrygd-replika.intern.dev.nav.no",
+                "https://familie-ks-infotrygd-replika.intern.nav.no",
                 "http://localhost:8080",
             )
         configuration.allowedMethods = listOf("GET", "POST", "OPTIONS")
