@@ -16,7 +16,7 @@ data class SeqDatoKonverteringRespons(
 
 @PreAuthorize("hasRole('FORVALTER')")
 @RestController
-@RequestMapping("/api/admin/seq-dato-konvertering")
+@RequestMapping("/api/forvalter/seq-dato-konvertering")
 class SeqDatoKonverteringController(
     private val repository: SeqDatoRepository,
 ) {

@@ -15,7 +15,7 @@ data class FnrNormaliseringRespons(
 
 @PreAuthorize("hasRole('FORVALTER')")
 @RestController
-@RequestMapping("/api/admin/fnr-normalisering")
+@RequestMapping("/api/forvalter/fnr-normalisering")
 class FnrNormaliseringController(
     private val repository: FnrNormaliseringRepository,
 ) {
