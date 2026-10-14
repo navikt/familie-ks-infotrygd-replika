@@ -1,5 +1,6 @@
 package no.nav.familie.ks.infotrygd.replika.normalisering
 
+import org.slf4j.LoggerFactory
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.stereotype.Repository
 
@@ -82,11 +83,16 @@ enum class SeqDatoKolonne(
 class SeqDatoRepository(
     private val jdbcTemplate: JdbcTemplate,
 ) {
-    fun konverter(seqDatoKolonne: SeqDatoKolonne): Int =
-        when (seqDatoKolonne.format) {
+    private val logger = LoggerFactory.getLogger(javaClass)
+
+    fun konverter(seqDatoKolonne: SeqDatoKolonne): Int {
+        logger.info("Konverterer datoformat ${seqDatoKolonne.format} for kolonne ${seqDatoKolonne.målkolonne}")
+
+        return when (seqDatoKolonne.format) {
             SeqDatoFormat.YYYYMM -> konverterÅrMåned(seqDatoKolonne)
             SeqDatoFormat.YYYYMMDD -> konverterÅrMånedDag(seqDatoKolonne)
         }
+    }
 
     private fun konverterÅrMåned(kolonne: SeqDatoKolonne): Int {
         val kilde = "trim(${kolonne.kildekolonne}::text)"
