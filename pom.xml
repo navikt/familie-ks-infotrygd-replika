@@ -25,7 +25,7 @@
         <db-util.version>1.0.7</db-util.version>
         <wiremock.version>3.13.2</wiremock.version>
         <testcontainers.postgresql.version>1.21.4</testcontainers.postgresql.version>
-        <felles.version>4.20261007140752_857f456</felles.version>
+        <felles.version>4.20261014144209_63578dc</felles.version>
     </properties>
 
     <dependencies>
