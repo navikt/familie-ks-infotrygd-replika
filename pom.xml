@@ -16,7 +16,7 @@
 
     <properties>
         <java.version>25</java.version>
-        <kotlin.version>2.4.20</kotlin.version>
+        <kotlin.version>2.4.21</kotlin.version>
         <kotlin.compiler.daemon>false</kotlin.compiler.daemon>
         <testcontainers.version>2.0.3</testcontainers.version>
         <springdoc-openapi.version>3.1.1</springdoc-openapi.version>
@@ -25,7 +25,7 @@
         <db-util.version>1.0.7</db-util.version>
         <wiremock.version>3.13.2</wiremock.version>
         <testcontainers.postgresql.version>1.21.4</testcontainers.postgresql.version>
-        <felles.version>4.20261007140752_857f456</felles.version>
+        <felles.version>4.20261014144209_63578dc</felles.version>
     </properties>
 
     <dependencies>
@@ -160,7 +160,7 @@
         <dependency>
             <groupId>no.nav.security</groupId>
             <artifactId>mock-oauth2-server</artifactId>
-            <version>6.0.6</version>
+            <version>6.1.3</version>
             <scope>test</scope>
         </dependency>
         <dependency>
