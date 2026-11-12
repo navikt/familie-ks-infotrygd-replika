@@ -5,7 +5,6 @@ application:
 NAIS_APP_NAME: familie-ks-infotrygd-replika
 DEPLOY_ENV: dev
 
-
 server.port: 8080
 
 # Spring konfigurasjon
@@ -40,12 +39,13 @@ management:
       probes:
         enabled: true
       group:
-        readyness:
+        readiness:
           include:
+            - readinessState
             - db
         liveness:
           include:
-            - db
+            - livenessState
   info:
     defaults:
       enabled: false
