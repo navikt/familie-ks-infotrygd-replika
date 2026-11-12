@@ -5,7 +5,6 @@ application:
 NAIS_APP_NAME: familie-ks-infotrygd-replika
 DEPLOY_ENV: dev
 
-
 server.port: 8080
 
 # Spring konfigurasjon
@@ -33,12 +32,36 @@ spring:
 
 management:
   endpoint:
+    info:
+      access: none
     health:
       show-details: ALWAYS
+      probes:
+        enabled: true
+      group:
+        readiness:
+          include:
+            - readinessState
+            - db
+        liveness:
+          include:
+            - livenessState
+  info:
+    defaults:
+      enabled: false
+
   endpoints:
     web:
+      base-path: /internal
       exposure:
-        include: health,info,prometheus
+        include: health,prometheus
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+    db:
+      enabled: true
 
 #oidc...
 http.proxy.parametername: notused
