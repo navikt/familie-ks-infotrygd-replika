@@ -29,10 +29,10 @@ spec:
     path: /internal/prometheus # Path to prometheus-metrics
   resources: # Optional. See: http://kubernetes.io/docs/user-guide/compute-resources/
     limits:
-      memory: 2096Mi  # app will be killed if exceeding these limits
+      memory: 896Mi  # app will be killed if exceeding these limits
     requests: # App is guaranteed the requested resources and  will be scheduled on nodes with at least this amount of resources available
-      cpu: 400m
-      memory: 2096Mi
+      cpu: 176
+      memory: 896Mi
   observability:
     logging:
       destinations:
