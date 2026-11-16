@@ -31,7 +31,7 @@ spec:
     limits:
       memory: 896Mi  # app will be killed if exceeding these limits
     requests: # App is guaranteed the requested resources and  will be scheduled on nodes with at least this amount of resources available
-      cpu: 176m
+      cpu: 176Mi
       memory: 896Mi
   observability:
     logging:
