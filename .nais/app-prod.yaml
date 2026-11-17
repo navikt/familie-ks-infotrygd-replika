@@ -29,10 +29,10 @@ spec:
     path: /internal/prometheus # Path to prometheus-metrics
   resources: # Optional. See: http://kubernetes.io/docs/user-guide/compute-resources/
     limits:
-      memory: 896Mi  # app will be killed if exceeding these limits
+      memory: 2096Mi  # app will be killed if exceeding these limits
     requests: # App is guaranteed the requested resources and  will be scheduled on nodes with at least this amount of resources available
-      cpu: 176m
-      memory: 896Mi
+      cpu: 400m
+      memory: 2096Mi
   observability:
     logging:
       destinations:
@@ -95,6 +95,6 @@ spec:
     - name: EXODUS_SCOPE
       value: api://prod-fss.teamfamilie.familie-ks-exodus/.default
     - name: EXODUS_SCHEDULER_ENABLED
-      value: "false"
+      value: "true"
     - name: JDK_JAVA_OPTIONS
       value: "-XX:MinRAMPercentage=25.0 -XX:MaxRAMPercentage=75.0"
